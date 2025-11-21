@@ -1,9 +1,13 @@
+import { useState } from "react";
 import Header from "./components/Header";
 import StatCard from "./components/StatCard";
 import EventList from "./components/EventList";
 import NewsList from "./components/NewsList";
+import BottomNav from "./components/BottomNav";
 
 function App() {
+  const [activeTab, setActiveTab] = useState("home");
+
   const stats = {
     totalSold: "12,450 nuts",
     pendingPayments: "₹ 86,500",
@@ -27,7 +31,7 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pb-24">
       <Header />
 
       <div className="max-w-md mx-auto p-4 space-y-4">
@@ -74,6 +78,8 @@ function App() {
           </ul>
         </div>
       </div>
+
+      <BottomNav active={activeTab} onSelect={setActiveTab} />
     </div>
   );
 }
