@@ -1,73 +1,81 @@
+import Header from "./components/Header";
+import StatCard from "./components/StatCard";
+import EventList from "./components/EventList";
+import NewsList from "./components/NewsList";
+
 function App() {
+  const stats = {
+    totalSold: "12,450 nuts",
+    pendingPayments: "₹ 86,500",
+    nextPayout: "23 Nov",
+  };
+
+  const upcomingEvents = [
+    { title: "Weekly collection at Village Center", date: "Fri, 22 Nov • 9:00 AM" },
+    { title: "Buyers meetup & price update", date: "Mon, 25 Nov • 5:30 PM" },
+  ];
+
+  const news = [
+    { title: "Coconut prices rise 3% in coastal markets", source: "AgriPulse" },
+    { title: "New subsidy for drip irrigation announced", source: "Govt. Notice" },
+  ];
+
+  const tips = [
+    "Dry mature nuts for 2-3 weeks before sale to reduce weight loss.",
+    "Bundle invoices per buyer to speed up payments.",
+    "Set reminders 3 days before scheduled pickup.",
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05),transparent_50%)]"></div>
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      <Header />
 
-      <div className="relative min-h-screen flex items-center justify-center p-8">
-        <div className="max-w-2xl w-full">
-          {/* Header with Flames icon */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center mb-6">
-              <img
-                src="/flame-icon.svg"
-                alt="Flames"
-                className="w-24 h-24 drop-shadow-[0_0_25px_rgba(59,130,246,0.5)]"
-              />
-            </div>
+      <div className="max-w-md mx-auto p-4 space-y-4">
+        {/* Greeting */}
+        <div className="rounded-2xl border border-white/10 bg-[linear-gradient(120deg,rgba(16,185,129,0.12),transparent)] p-4">
+          <p className="text-slate-300 text-sm">Welcome back</p>
+          <h2 className="text-xl font-semibold text-white">Your coconut sales at a glance</h2>
+        </div>
 
-            <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">
-              Flames Blue
-            </h1>
+        {/* Key stats */}
+        <div className="grid grid-cols-2 gap-3">
+          <StatCard label="Total Coconut Sold" value={stats.totalSold} sublabel="This season" tone="emerald" />
+          <StatCard label="Pending Payments" value={stats.pendingPayments} sublabel={`Next payout ${stats.nextPayout}`} tone="amber" />
+        </div>
 
-            <p className="text-xl text-blue-200 mb-6">
-              Build applications through conversation
-            </p>
-          </div>
+        {/* Upcoming events */}
+        <EventList title="Upcoming Events" items={upcomingEvents} />
 
-          {/* Instructions */}
-          <div className="bg-slate-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-8 shadow-xl mb-6">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                1
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Describe your idea</h3>
-                <p className="text-blue-200/80 text-sm">Use the chat panel on the left to tell the AI what you want to build</p>
-              </div>
-            </div>
+        {/* News & updates */}
+        <NewsList title="News & Updates" items={news} />
 
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                2
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Watch it build</h3>
-                <p className="text-blue-200/80 text-sm">Your app will appear in this preview as the AI generates the code</p>
-              </div>
-            </div>
+        {/* Quick tips */}
+        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+          <h3 className="text-sm font-semibold text-white mb-2">Quick Tips</h3>
+          <ul className="list-disc list-inside space-y-1">
+            {tips.map((t, i) => (
+              <li key={i} className="text-sm text-slate-300">{t}</li>
+            ))}
+          </ul>
+        </div>
 
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                3
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Refine and iterate</h3>
-                <p className="text-blue-200/80 text-sm">Continue the conversation to add features and make changes</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="text-center">
-            <p className="text-sm text-blue-300/60">
-              No coding required • Just describe what you want
-            </p>
-          </div>
+        {/* Suggested additions section */}
+        <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4">
+          <h3 className="text-sm font-semibold text-white mb-2">Suggested items for home</h3>
+          <ul className="text-sm text-slate-300 space-y-1">
+            <li>• Today’s price per nut, kernel, copra</li>
+            <li>• Last 7 days trend chart</li>
+            <li>• Outstanding invoices by buyer</li>
+            <li>• Next pickup schedule & vehicle status</li>
+            <li>• Inventory: fresh, dried, damaged</li>
+            <li>• Weather and rainfall alert</li>
+            <li>• Fertilizer reminder & expense tracker</li>
+            <li>• Quick action: create sale, add expense, request pickup</li>
+          </ul>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
